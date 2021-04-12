@@ -1,0 +1,12 @@
+﻿using System;
+
+namespace PriceCalculation
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+        }
+    }
+}
