@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PriceCalculation
 {
@@ -13,20 +14,29 @@ namespace PriceCalculation
 
                 var items = Console.ReadLine().Split(' ');
 
-                var productSummary = GetProductsSummary(items);
+                var discounts = Helpers.Helpers.CreateDiscounts();
 
+                var basket = new ShoppingBasket(discounts);
 
+                var productsSummary = GetProductsSummary(basket, items);
 
+                var subTotal = productsSummary.SubTotal;
+
+                var discountsApplied = basket.GetBasketDiscounts().ToList();
+
+                var totalPrice = subTotal - discountsApplied.Sum(item => item.Amount);
+
+                Console.WriteLine("Total Price: " + $"{ totalPrice }");
                 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                Console.WriteLine(ex.Message);
+                throw new ApplicationException("An application erro has occured", ex);
             }
         }
 
-        private static ShoppingBasket GetProductsSummary(IEnumerable<string> items)
+        private static ShoppingBasket GetProductsSummary(ShoppingBasket basket, IEnumerable<string> items)
         {
             var products = new List<string>();
 
@@ -34,8 +44,6 @@ namespace PriceCalculation
             {
                 products.Add(item.ToLower());
             }
-
-            var basket = new ShoppingBasket();
 
             basket.AddProducts(Helpers.Helpers.CreateProducts(products));
 

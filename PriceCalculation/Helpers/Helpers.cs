@@ -1,4 +1,5 @@
-﻿using PriceCalculation.Domain;
+﻿using PriceCalculation.Discounts;
+using PriceCalculation.Domain;
 using PriceCalculation.Factories;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,47 @@ namespace PriceCalculation.Helpers
             }
 
             return productsAndQuantities;
+        }
+
+        public static IEnumerable<IDiscount> CreateDiscounts()
+        {
+            return new List<IDiscount>
+            {
+                new FullPriceDiscount
+                (
+                    new ProductQuantity
+                    {
+                        Product = new Product
+                        {
+                            ProductId = 2,
+                            ProductName = "Milk"
+                        },
+                        Quantity = 3
+                    },
+                    new DiscountedProduct
+                    {
+                        ProductId = 2,
+                        ProductName = "Milk"
+                    }
+                ),
+                new HalfPriceDiscount
+                (
+                    new ProductQuantity
+                    {
+                        Product = new Product
+                        {
+                            ProductId = 1,
+                            ProductName = "Butter"
+                        },
+                        Quantity = 2
+                    },
+                    new DiscountedProduct
+                    {
+                        ProductId = 3,
+                        ProductName = "Bread"
+                    }
+                )
+            };
         }
     }
 }
