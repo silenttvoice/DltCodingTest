@@ -9,12 +9,12 @@ namespace PriceCalculation
 {
     public class ShoppingBasket : IShoppingBasket
     {
-        private IEnumerable<IDiscount> _discounts;
+        private readonly IEnumerable<IDiscount> _discounts;
         private readonly List<ProductQuantity> _productItems;
 
         public ShoppingBasket(IEnumerable<IDiscount> discounts)
         {
-            _discounts = discounts ?? throw new ArgumentNullException(nameof(discounts));
+            _discounts = discounts;
             _productItems = new List<ProductQuantity>();
         }
 

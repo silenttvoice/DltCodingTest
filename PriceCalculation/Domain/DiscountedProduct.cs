@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PriceCalculation.Domain
+﻿namespace PriceCalculation.Domain
 {
     public class DiscountedProduct
     {
